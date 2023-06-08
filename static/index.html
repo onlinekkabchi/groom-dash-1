@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @font-face {
+        font-family: "Dovemayo_wild";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/Dovemayo_wild.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: "Dovemayo_wild";
+      }
+      #dash-form {
+        display: flex;
+        flex-direction: column;
+      }
+      #dash-form > input[type="text"] {
+        width: 150px;
+        margin-block: 15px;
+      }
+      #dash-form > textarea {
+        width: 150px;
+        margin-block: 15px;
+      }
+      #dash-form > input[type="submit"] {
+        width: 100px;
+        margin-block: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>구름 정보 보안 수업 과제</h1>
+    <ul>
+      <a id="home-btn" href="/#home">home</a>
+      <a id="dash-btn" href="/#dash">dash</a>
+    </ul>
+    <div id="app"></div>
+
+    <script type="module" src="./connect.js"></script>
+    <script type="module" src="./dashboard.js"></script>
+    <!-- Google Analytics -->
+    <script>
+      window.ga =
+        window.ga ||
+        function () {
+          (ga.q = ga.q || []).push(arguments);
+        };
+      ga.l = +new Date();
+      ga("create", "UA-XXXXX-Y", "auto");
+      ga("send", "pageview");
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <!-- End Google Analytics -->
+  </body>
+</html>
