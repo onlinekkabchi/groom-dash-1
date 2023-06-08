@@ -6,6 +6,7 @@
 # 사용 라이브러리
 서버용
 - express
+- express-session
 - axios
 
 테스트용
