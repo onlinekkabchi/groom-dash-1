@@ -16,5 +16,5 @@
 [GOOOGLE APP ENGINE](https://apm-server-tester-1.du.r.appspot.com/)
 
 # 로그인 정보
-Username: admin
-Password: password
+- Username: admin
+- Password: password
