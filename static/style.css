@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "Dovemayo_wild";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/Dovemayo_wild.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "Dovemayo_wild";
+  display: flex;
+  flex-direction: column;
+  padding-left: 3%;
+}
+#dash-form {
+  display: flex;
+  flex-direction: column;
+}
+#dash-form > input[type="text"] {
+  width: 150px;
+  margin-block: 15px;
+}
+#dash-form > textarea {
+  width: 150px;
+  margin-block: 15px;
+}
+#dash-form > input[type="submit"] {
+  width: 100px;
+  margin-block: 15px;
+}
+#dashboard > ul {
+  height: 200px;
+  width: 200px;
+  margin-inline: 0;
+  padding-inline: 10px;
+  list-style: square;
+  border: 1px dashed blue;
+}
+#dashboard > ul > li > h5 {
+  margin: 0;
+}
+#dashboard > ul > li > p {
+  margin: 0;
+}

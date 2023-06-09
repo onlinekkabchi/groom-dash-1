@@ -1,28 +1,41 @@
+const openDashCMT = `
+<ul></ul>
+<input type="button" value="글쓰기"/>
+`;
+
 if (document.querySelector("#dashboard")) {
   const dash = document.querySelector("#dashboard");
   const query = window.location.search;
   const params = new URLSearchParams(query);
 
-  function accessDASH(t) {
-    dash.innerHTML += t;
+  params.get("logged") === "true" ? (dash.innerHTML += openDashCMT) : "";
+
+  const list = document.querySelector("#dashboard > ul");
+
+  if (list) {
+    const result = async () => {
+      try {
+        const response = await fetch("/writedash");
+        const john = await response.json();
+        const data = john.sheetDATA.data;
+
+        data.map((item) => {
+          list.insertAdjacentHTML(
+            "afterbegin",
+            `<li>
+            <h5>${item.title}</h5>
+            <sub>${item.date}</sub>
+            <p>${item.content}</p>
+          </li>`
+          );
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    result();
   }
-
-  params.get("logged") === "true"
-    ? accessDASH(
-        `<form id="dash-form"
-        >
-            <label for="title">제목:</label>
-            <input type="text" name="title"/>
-            <label for="content">내용:</label>
-    <textarea id="content" name="content" rows="5" cols="40" placeholder="내용 쓰세요"></textarea>
-    <input type="submit" value="submit"/>
-        </form>
-
-        <blockquote></blockquote>
-           
-        `
-      )
-    : "";
 }
 
 if (document.querySelector("#dash-form")) {
