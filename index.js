@@ -23,7 +23,8 @@ const client = new MongoClient(uri, {
 const PORT = 8088;
 const app = express();
 
-app.use(express.static(path.resolve("static")));
+app.use("/", express.static(path.resolve("static/main")));
+app.use("/dash", express.static(path.resolve("static/dashboard")));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,6 +39,11 @@ app.use(
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./static/index.html"));
+});
+
+app.get("/dash", (req, res) => {
+  res.sendFile(path.resolve("./static/dashboard/index.html"));
+  // res.send("dashboard");
 });
 
 app.get("/login", (req, res) => {
@@ -77,10 +83,10 @@ app.post("/login", async (req, res) => {
       .findOne({ userId: username, userPassword: password });
     if (result) {
       console.log(result);
-      res.redirect("/" + "?logged=true" + "#dash");
+      res.redirect("/dash" + "?logged=true");
     } else {
       console.log(result);
-      res.redirect("/" + "#fail");
+      res.redirect("/#fail");
     }
   } catch (error) {
     res

@@ -16,8 +16,8 @@ const loginCMT = ` <h3>로그인</h3>
   placeholder="Enter your password"
   required
 /><br /><br />
-<input type="submit" value="로그인">
-<input type="button" value="회원가입">
+<input type="submit" value="로그인"/>
+<input type="button" value="회원가입" />
 </form>`;
 
 const registerCMT = ` <h3>회원가입</h3>
@@ -42,7 +42,11 @@ const registerCMT = ` <h3>회원가입</h3>
 
 const dashCMT = `<div>
     <h2>게시판</h2>
-    <div id="dashboard"></div>
+    <div id="dashboard">
+    <ul></ul>
+    <input type="button" value="글쓰기"/>
+    <blockquote></blockquote>
+    </div>
   </div>`;
 
 const failCMT = `<div>로그인실패ㅠ</div>`;
