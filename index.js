@@ -79,7 +79,8 @@ app.post("/login", async (req, res) => {
       console.log(result);
       res.redirect("/" + "?logged=true" + "#dash");
     } else {
-      res.status(406).send({ message: "no match" });
+      console.log(result);
+      res.redirect("/" + "#fail");
     }
   } catch (error) {
     res

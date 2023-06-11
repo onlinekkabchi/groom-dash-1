@@ -23,9 +23,10 @@ body {
   width: 150px;
   margin-block: 15px;
 }
-#dash-form > input[type="submit"] {
+#dash-form > input[type="submit"],
+input[type="button"] {
   width: 100px;
-  margin-block: 15px;
+  margin-block: 5px;
 }
 #dashboard > ul {
   height: 200px;
