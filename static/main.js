@@ -1,3 +1,5 @@
+import Router from "./router.js";
+
 const loginCMT = ` <h3>로그인</h3>
 <form id="form-login" method="post" action="/login">    
 <label for="username">Username:</label>
@@ -47,67 +49,17 @@ const dashCMT = `<div>
 
 const failCMT = `<div>로그인실패ㅠ</div>`;
 
-const routes = {
-  "#home": homehandler,
-  "#dash": dashhandler,
-  "#fail": failhandler,
-  "#register": registerhandler,
-};
-
 const app = document.querySelector("#app");
 
-init();
+const router = new Router(loginCMT, registerCMT, dashCMT, failCMT);
 
-function init() {
-  function origin() {
-    if (app) {
-      app.innerHTML += loginCMT;
-    }
-  }
-  const hash = window.location.hash;
-  console.log(hash);
-
-  const handler = routes[hash] || origin;
-
-  handler();
-}
-
-function defaultHandler() {
-  console.log("Page not found");
-}
-
-function homehandler() {
-  // console.log("home");
-  app.innerHTML = loginCMT;
-}
-
-function registerhandler() {
-  app.innerHTML = registerCMT;
-}
-
-function dashhandler() {
-  // console.log("dash");
-  app.innerHTML = dashCMT;
-}
-
-function failhandler() {
-  app.innerHTML = failCMT;
-}
+router.init();
 
 window.addEventListener("hashchange", function () {
-  const hash = window.location.hash;
-
-  console.log(hash);
-
-  const handler = routes[hash] || defaultHandler;
-
-  handler();
+  router.handler(window.location.hash);
 });
 
-const registerBTN = document.querySelector("#form-login > input[type=button]");
-
-if (registerBTN) {
-  registerBTN.addEventListener("click", function () {
-    window.location.href = "/#register";
-  });
-}
+// const registerBTN = document.querySelector("#form-login > input[type=button]");
+// registerBTN.addEventListener("click", function () {
+//   window.location.href = "/#register";
+// });

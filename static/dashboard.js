@@ -1,6 +1,7 @@
 const openDashCMT = `
 <ul></ul>
 <input type="button" value="글쓰기"/>
+<blockquote></blockquote>
 `;
 
 if (document.querySelector("#dashboard")) {

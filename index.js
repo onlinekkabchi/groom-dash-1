@@ -68,46 +68,64 @@ app.get("/login", (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const conn = await client.connect();
-  const result = await conn
-    .db(db)
-    .collection(coll)
-    .findOne({ userId: username, userPassword: password });
-  if (result) {
-    console.log(result);
-    res.redirect("/" + "?logged=true" + "#dash");
-  } else {
-    res.status(406).send({ message: "no match" });
+
+  try {
+    const conn = await client.connect();
+    const result = await conn
+      .db(db)
+      .collection(coll)
+      .findOne({ userId: username, userPassword: password });
+    if (result) {
+      console.log(result);
+      res.redirect("/" + "?logged=true" + "#dash");
+    } else {
+      res.status(406).send({ message: "no match" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "server error", error: error }));
   }
 });
 
 app.get("/writedash", async (req, res) => {
+  // 인증과정
   try {
-    const response = await axios.get(list);
-    const data = await response.data;
-    // console.log(data);
-    res.send(JSON.stringify({ sheetDATA: data }));
+    await axios
+      .get(list)
+      .then((response) => response.data)
+      .then((result) => res.send(JSON.stringify({ sheetDATA: result })))
+      .catch((err) =>
+        res
+          .status(500)
+          .send(JSON.stringify({ message: "Axios error", error: err }))
+      );
   } catch (error) {
-    console.error(error);
-    res.send("An error occurred");
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "server error", error: error }));
   }
 });
 
 app.post("/writedash", async (req, res) => {
-  try {
-    const { title, content } = req.body;
-    const response = await axios.post(list, null, {
+  // 인증과정
+
+  const { title, content } = req.body;
+  await axios
+    .post(list, null, {
       params: {
         title: title,
         content: content,
       },
-    });
-    const result = response.data;
-    res.status(200).send(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred");
-  }
+    })
+    .then((res) => res.json())
+    .then((res) => res.data)
+    .then((result) => res.status(200).send(result))
+    .catch((err) =>
+      res
+        .status(500)
+        .send(JSON.stringify({ message: "Axios error", error: err }))
+    );
 });
 
 app.listen(PORT, () => {
