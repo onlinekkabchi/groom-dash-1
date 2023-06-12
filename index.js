@@ -38,39 +38,16 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./static/index.html"));
+  res.sendFile(path.resolve("./static/main/index.html"));
 });
 
 app.get("/dash", (req, res) => {
   res.sendFile(path.resolve("./static/dashboard/index.html"));
-  // res.send("dashboard");
 });
 
 app.get("/login", (req, res) => {
   res.send("login page...");
 });
-
-// app.post("/login", (req, res) => {
-//   const { username, password } = req.body;
-
-//   if (!req.session.loggedin) {
-//     const validUsername = "admin";
-//     const validPassword = "password";
-
-//     if (username === validUsername && password === validPassword) {
-//       req.session.loggedin = true;
-//       req.session.username = username;
-//       console.log("로그인 성공!");
-//       res.redirect("/" + "?logged=true" + "#dash");
-//     } else {
-//       console.log("로그인 실패");
-//       res.redirect("/#fail");
-//     }
-//   } else {
-//     console.log("이미 로그인 되어 있습니다");
-//     res.redirect("/" + "?logged=true" + "#dash");
-//   }
-// });
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
