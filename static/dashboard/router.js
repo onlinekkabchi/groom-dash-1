@@ -1,5 +1,3 @@
-import Dashboard from "./dashboard/dashboard.js";
-
 export default class Router {
   constructor(loginCMT, registerCMT, dashCMT, failCMT, dashFormCMT) {
     this.app = document.querySelector("#app");

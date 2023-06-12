@@ -1,6 +1,13 @@
 export default function Dashboard() {
-  // const dash = document.querySelector("#dashboard");
-  // dash.innerHTML = dashBASE;
+  const app = document.querySelector("#app");
+  app.innerHTML = `<div>
+  <h2>게시판</h2>
+  <div id="dashboard">
+  <ul></ul>
+  <input type="button" value="글쓰기"/>
+  <blockquote></blockquote>
+  </div>
+</div>`;
   const list = document.querySelector("#dashboard > ul");
   // const writeBtn = document.querySelector("#dashboard > input[type='button']");
 
