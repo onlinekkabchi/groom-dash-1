@@ -65,12 +65,12 @@ export const createDashboardElement = () => {
   const dashboardElement = document.createElement("div");
   dashboardElement.id = "dashboard";
 
-  const ulElement = document.createElement("ul");
-
   const writeBtnElement = document.createElement("input");
   writeBtnElement.id = "write-btn";
   writeBtnElement.type = "button";
   writeBtnElement.value = "글쓰기";
+
+  const ulElement = document.createElement("ul");
 
   dashboardElement.appendChild(ulElement);
   dashboardElement.appendChild(writeBtnElement);

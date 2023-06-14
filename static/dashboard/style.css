@@ -6,10 +6,26 @@
   font-style: normal;
 }
 body {
+  max-width: 400px;
   font-family: "Dovemayo_wild";
   display: flex;
   flex-direction: column;
   padding-left: 3%;
+}
+header {
+  background-color: #faffff;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding-block: 5%;
+}
+header > h1 {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  background-color: #e1f5fe;
+  padding-block: 3%;
 }
 #dash-form {
   display: flex;
@@ -29,15 +45,25 @@ input[type="button"] {
   margin-block: 5px;
 }
 #dashboard > ul {
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 100%;
   margin-inline: 0;
-  padding-inline: 10px;
-  list-style: square;
-  border: 1px dashed blue;
+  padding-block: 1%;
+  padding-inline: 0;
+  overflow-y: scroll;
+}
+#dashboard > ul > li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 1px solid black;
 }
 #dashboard > ul > li > h5 {
+  font-size: 18px;
+  font-weight: 700;
   margin: 0;
+  cursor: pointer;
 }
 #dashboard > ul > li > p {
   margin: 0;

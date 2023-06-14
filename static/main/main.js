@@ -9,8 +9,13 @@ import {
 
 const router = new Router(loginCMT, registerCMT, dashCMT, failCMT, dashFormCMT);
 
-router.init();
-
 window.addEventListener("hashchange", function () {
   router.handler(window.location.hash);
 });
+
+window.onload = function () {
+  // const user = sessionStorage.getItem("user");
+  // user ? router.handler("#logged") : router.handler();
+
+  router.handler();
+};

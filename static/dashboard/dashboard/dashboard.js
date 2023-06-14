@@ -8,30 +8,29 @@ export default class Dashboard {
     this.data = [];
   }
 
+  listItem(item) {
+    const theItem = createPostElement(item);
+    theItem.addEventListener("click", () => {
+      window.location.href = `/dash/post?id=${item.id.toString()}`;
+    });
+    return theItem;
+  }
+
   render() {
     while (this.list.firstChild) {
       this.list.removeChild(this.list.firstChild);
     }
-
     this.data.forEach((item) => {
-      const listItem = createPostElement(item);
-      listItem.addEventListener("click", () => {
-        window.location.href = `/dash/post?id=${item.id.toString()}`;
-      });
-      this.list.appendChild(listItem);
+      this.list.appendChild(this.listItem(item));
     });
-
-    console.log("rendered");
-
-    return this;
   }
 
-  async getList() {
+  async getList(info) {
     if (this.data.length > 0) {
       this.data = [];
     }
     try {
-      await fetch("/dash/writedash")
+      await fetch(`/dash/writedash?user=${info}`)
         .then((res) => res.json())
         .then((res) => res.result)
         .then((result) =>
@@ -43,7 +42,6 @@ export default class Dashboard {
       console.log(error);
     } finally {
       this.render();
-      console.log(this.data);
     }
   }
 }

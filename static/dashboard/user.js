@@ -1,8 +1,8 @@
 export default class User extends EventTarget {
   constructor() {
     super();
+    this.info = null;
     this.state = false;
-    this.write = false;
   }
 
   setState(val) {
@@ -12,10 +12,12 @@ export default class User extends EventTarget {
     );
   }
 
-  setDash(val) {
-    this.write = val;
-    this.dispatchEvent(
-      new CustomEvent("userwrite", { detail: { write: "true" } })
-    );
+  setUser(info) {
+    sessionStorage.setItem("user", info);
+    this.setInfo();
+  }
+
+  setInfo() {
+    this.info = sessionStorage.getItem("user");
   }
 }

@@ -6,6 +6,7 @@ export default class Router {
       dash: this.dashhandler.bind(this),
       "#fail": this.failhandler.bind(this),
       "#register": this.registerhandler.bind(this),
+      "#logged": this.loggedhandler.bind(this),
     }; // The error indicates that the innerHTML property is being accessed on an undefined object. The issue is with the scope of this within the dashhandler method. When the dashhandler function is invoked as this.routes[hash](), the this context is not preserved correctly, causing this.app to be undefined.
     // By using the bind() method, you ensure that the this context is correctly set to the Router instance when the dashhandler method is invoked.
     this.loginCMT = loginCMT;
@@ -13,11 +14,6 @@ export default class Router {
     this.dashCMT = dashCMT;
     this.failCMT = failCMT;
     this.dashFormCMT = dashFormCMT;
-  }
-
-  init() {
-    const hash = window.location.hash;
-    this.handler(hash);
   }
 
   origin() {
@@ -47,5 +43,9 @@ export default class Router {
 
   failhandler() {
     this.app.innerHTML = this.failCMT;
+  }
+
+  loggedhandler() {
+    this.app.innerHTML = `<div>유저있음</div>`;
   }
 }

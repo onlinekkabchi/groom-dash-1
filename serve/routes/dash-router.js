@@ -2,6 +2,7 @@ import express from "express";
 import path from "node:path";
 import axios from "axios";
 import { list } from "./mongo-client.js";
+import { authMiddleware } from "./auth-mid.js";
 
 const dashRouter = express.Router();
 const addr = "./static/dashboard";
@@ -10,13 +11,13 @@ dashRouter.use("/", express.static(path.resolve(addr)));
 dashRouter.use(express.urlencoded({ extended: true }));
 dashRouter.use(express.json());
 
-dashRouter.get("/writedash", async (req, res) => {
-  // 인증과정
+dashRouter.get("/writedash", authMiddleware, async (req, res) => {
+  // auth middleware
+
   try {
     await axios
       .get(list)
       .then((response) => response.data)
-      // .then((res) => console.log(res))
       .then((result) => res.send(JSON.stringify({ result: result })))
       .catch((err) =>
         res

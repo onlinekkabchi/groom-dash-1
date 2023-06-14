@@ -6,39 +6,24 @@
   font-style: normal;
 }
 body {
+  max-width: 400px;
   font-family: "Dovemayo_wild";
   display: flex;
   flex-direction: column;
   padding-left: 3%;
 }
-#dash-form {
+header {
+  background-color: #faffff;
   display: flex;
-  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+  padding-block: 5%;
 }
-#dash-form > input[type="text"] {
-  width: 150px;
-  margin-block: 15px;
-}
-#dash-form > textarea {
-  width: 150px;
-  margin-block: 15px;
-}
-#dash-form > input[type="submit"],
-input[type="button"] {
-  width: 100px;
-  margin-block: 5px;
-}
-#dashboard > ul {
-  height: 200px;
-  width: 200px;
-  margin-inline: 0;
-  padding-inline: 10px;
-  list-style: square;
-  border: 1px dashed blue;
-}
-#dashboard > ul > li > h5 {
+header > h1 {
   margin: 0;
+  padding: 0;
 }
-#dashboard > ul > li > p {
-  margin: 0;
+nav {
+  background-color: #e1f5fe;
+  padding-block: 3%;
 }
