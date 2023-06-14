@@ -1,50 +1,52 @@
-export default class Router {
-  constructor(loginCMT, registerCMT, dashCMT, failCMT, dashFormCMT) {
-    this.app = document.querySelector("#app");
-    this.routes = {
-      home: this.homehandler.bind(this),
-      dash: this.dashhandler.bind(this),
-      fail: this.failhandler.bind(this),
-      register: this.registerhandler.bind(this),
-    }; // The error indicates that the innerHTML property is being accessed on an undefined object. The issue is with the scope of this within the dashhandler method. When the dashhandler function is invoked as this.routes[hash](), the this context is not preserved correctly, causing this.app to be undefined.
-    // By using the bind() method, you ensure that the this context is correctly set to the Router instance when the dashhandler method is invoked.
-    this.loginCMT = loginCMT;
-    this.registerCMT = registerCMT;
-    this.dashCMT = dashCMT;
-    this.failCMT = failCMT;
-    this.dashFormCMT = dashFormCMT;
-  }
+import {
+  createFormElement,
+  createDashboardElement,
+} from "./dashboard/component.js";
+import Dashboard from "./dashboard/dashboard.js";
+import DashFORM from "./dashboard/dashform.js";
+import { hashWrite } from "./hash.js";
 
+export const router = {
+  app: document.querySelector("#app"),
+  dash: createDashboardElement(),
+  board: null,
+  list: null,
+  writeBtb: null,
+  formElement: createFormElement(),
+  form: null,
   init() {
+    this.app.appendChild(this.dash);
+    this.list = this.dash.querySelector("ul");
+    this.board = new Dashboard(this.app, this.dash, this.list);
+    this.board.getList();
+    this.writeBtb = this.dash.querySelector("#write-btn");
+    this.writeBtb.addEventListener("click", () => hashWrite());
+  },
+  hashchange() {
     const hash = window.location.hash;
-    this.handler(hash);
-  }
+    switch (hash) {
+      case "#home":
+        this.app.removeChild(this.formElement);
+        this.app.appendChild(this.dash);
+        this.board.getList();
+        console.log(this);
+        break;
+      case "#write":
+        this.dash.remove();
+        this.app.appendChild(this.formElement);
+        this.form = new DashFORM(
+          document.querySelector("#dash-form"),
+          document.querySelector("#cancel-btn"),
+          document.querySelector("blockquote")
+        );
+        this.form.addEvent();
+        console.log(this);
+        break;
+      case "#tester":
+        break;
 
-  origin() {
-    this.app.innerHTML = this.loginCMT;
-  }
-
-  handler(hash) {
-    hash ? this.routes[hash]() : this.origin();
-  }
-
-  defaultHandler() {
-    console.log("Page not found");
-  }
-
-  homehandler() {
-    this.app.innerHTML = this.loginCMT;
-  }
-
-  registerhandler() {
-    this.app.innerHTML = this.registerCMT;
-  }
-
-  dashhandler() {
-    window.location.href = "/dash";
-  }
-
-  failhandler() {
-    this.app.innerHTML = this.failCMT;
-  }
-}
+      default:
+        break;
+    }
+  },
+};
