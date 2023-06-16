@@ -1,5 +1,5 @@
 const loginCMT = ` <h3>로그인</h3>
-<form id="form-login" method="post" action="/login">    
+<form id="form-login" method="post" action="/login" attr="login">    
 <label for="username">Username:</label>
 <input
   type="text"
@@ -17,11 +17,10 @@ const loginCMT = ` <h3>로그인</h3>
   required
 /><br /><br />
 <input type="submit" value="로그인"/>
-<input type="button" value="회원가입" />
 </form>`;
 
 const registerCMT = ` <h3>회원가입</h3>
-<form method="post" action="/login">    <label for="username">Username:</label>
+<form method="post" action="/login">    <label for="username" attr="register">Username:</label>
 <input
   type="text"
   id="username"

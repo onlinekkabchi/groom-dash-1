@@ -9,38 +9,13 @@ import {
 
 const router = new Router(loginCMT, registerCMT, dashCMT, failCMT, dashFormCMT);
 
-router.init();
-
 window.addEventListener("hashchange", function () {
   router.handler(window.location.hash);
 });
 
-const appDiv = document.querySelector("#app");
+window.onload = function () {
+  // const user = sessionStorage.getItem("user");
+  // user ? router.handler("#logged") : router.handler(window.location.hash);
 
-// Create a new MutationObserver
-const observer = new MutationObserver(function (mutations) {
-  mutations.forEach(function (mutation) {
-    if (mutation.type === "childList") {
-      console.log("innerHTML of 'app' div has changed:", appDiv.innerHTML);
-      // Perform actions or call functions when innerHTML changes
-    }
-  });
-});
-
-// Configure and start observing the "app" div
-const observerConfig = {
-  childList: true, // Watch for changes in the child nodes (including innerHTML changes)
-  subtree: true, // Watch for changes in the entire subtree of the "app" div
+  router.handler(window.location.hash);
 };
-observer.observe(appDiv, observerConfig);
-// function handleUserEvent() {}
-
-// function setDashForm() {}
-
-// user.addEventListener("userin", handleUserEvent);
-// user.addEventListener("userwrite", setDashForm);
-
-// const registerBTN = document.querySelector("#form-login > input[type=button]");
-// registerBTN.addEventListener("click", function () {
-//   window.location.href = "/#register";
-// });
