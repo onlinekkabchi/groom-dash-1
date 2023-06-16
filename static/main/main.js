@@ -15,7 +15,7 @@ window.addEventListener("hashchange", function () {
 
 window.onload = function () {
   // const user = sessionStorage.getItem("user");
-  // user ? router.handler("#logged") : router.handler();
+  // user ? router.handler("#logged") : router.handler(window.location.hash);
 
-  router.handler();
+  router.handler(window.location.hash);
 };

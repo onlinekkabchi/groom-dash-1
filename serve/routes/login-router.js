@@ -1,19 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
 import { db, coll, client } from "./mongo-client.js";
-
 dotenv.config();
+const router = express.Router();
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
 
-const loginRouter = express.Router();
-
-loginRouter.use(express.urlencoded({ extended: true }));
-loginRouter.use(express.json());
-
-loginRouter.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.send("login page...");
 });
 
-loginRouter.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const { username, password } = req.body;
   try {
     const conn = await client.connect();
@@ -35,4 +32,4 @@ loginRouter.post("/", async (req, res) => {
   }
 });
 
-export default loginRouter;
+export default router;

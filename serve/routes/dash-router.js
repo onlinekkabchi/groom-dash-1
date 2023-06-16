@@ -3,15 +3,13 @@ import path from "node:path";
 import axios from "axios";
 import { list } from "./mongo-client.js";
 import { authMiddleware } from "./auth-mid.js";
-
-const dashRouter = express.Router();
+const router = express.Router();
 const addr = "./static/dashboard";
+router.use("/", express.static(path.resolve(addr)));
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
 
-dashRouter.use("/", express.static(path.resolve(addr)));
-dashRouter.use(express.urlencoded({ extended: true }));
-dashRouter.use(express.json());
-
-dashRouter.get("/writedash", authMiddleware, async (req, res) => {
+router.get("/writedash", authMiddleware, async (req, res) => {
   // auth middleware
 
   try {
@@ -31,7 +29,7 @@ dashRouter.get("/writedash", authMiddleware, async (req, res) => {
   }
 });
 
-dashRouter.post("/writedash", async (req, res) => {
+router.post("/writedash", async (req, res) => {
   // 인증과정
   const { title, content } = req.body;
   await axios
@@ -50,12 +48,12 @@ dashRouter.post("/writedash", async (req, res) => {
     );
 });
 
-dashRouter.get("/post", (req, res) => {
+router.get("/post", (req, res) => {
   res.send("post!");
 });
 
-dashRouter.post("/post", (req, res) => {
+router.post("/post", (req, res) => {
   res.send("post!");
 });
 
-export default dashRouter;
+export default router;
