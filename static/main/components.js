@@ -36,7 +36,7 @@ const registerCMT = ` <h3>회원가입</h3>
   placeholder="Enter your password"
   required
 /><br /><br />
-<input type="submit" value="가입">
+<input type="submit" value="가입기능 비활성화 상태입니다.">
 </form>`;
 
 const failCMT = `<div>로그인실패ㅠ</div>`;
