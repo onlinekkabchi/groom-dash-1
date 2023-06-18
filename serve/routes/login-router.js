@@ -1,13 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
-import { db, coll, client } from "./mongo-client.js";
+import { db, coll, client } from "../db/mongo-client.js";
+import jwt from "jsonwebtoken";
+import { secretKey } from "../config/jwt.js";
+
 dotenv.config();
 const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.get("/", (req, res) => {
-  res.send("login page...");
+  res.send("login...");
 });
 
 router.post("/", async (req, res) => {
@@ -19,10 +22,16 @@ router.post("/", async (req, res) => {
       .collection(coll)
       .findOne({ userId: username, userPassword: password });
     if (result) {
-      console.log(result);
-      res.redirect("/dash" + `?logged=${result.userId}`);
+      // 유저아이디 암호화
+      const token = jwt.sign(
+        { userId: result.userId, userPassword: result.userPassword },
+        secretKey,
+        { expiresIn: 3600 } // expires in 1 hour (3600 seconds)
+      );
+      console.log("로그인성공");
+      console.log(token);
+      res.redirect("/dash" + `?logged=${token}`);
     } else {
-      console.log(result);
       res.redirect("/#fail");
     }
   } catch (error) {

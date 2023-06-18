@@ -1,23 +1,18 @@
 export default class User extends EventTarget {
   constructor() {
     super();
-    this.info = null;
-    this.state = false;
+    this.token = null;
   }
 
-  setState(val) {
-    this.state = val;
+  setUser(token) {
+    this.setToken(token);
+    sessionStorage.setItem("user", token);
     this.dispatchEvent(
-      new CustomEvent("userin", { detail: { state: "true" } })
+      new CustomEvent("userToken", { detail: { token: !null } })
     );
   }
 
-  setUser(info) {
-    sessionStorage.setItem("user", info);
-    this.setInfo();
-  }
-
-  setInfo() {
-    this.info = sessionStorage.getItem("user");
+  setToken(token) {
+    this.token = token;
   }
 }

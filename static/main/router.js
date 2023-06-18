@@ -1,9 +1,8 @@
 export default class Router {
-  constructor(loginCMT, registerCMT, dashCMT, failCMT, dashFormCMT) {
+  constructor(loginCMT, registerCMT, failCMT) {
     this.app = document.querySelector("#app");
     this.routes = {
       home: this.homehandler.bind(this),
-      dash: this.dashhandler.bind(this),
       "#fail": this.failhandler.bind(this),
       "#register": this.registerhandler.bind(this),
       "#logged": this.loggedhandler.bind(this),
@@ -11,9 +10,7 @@ export default class Router {
     // By using the bind() method, you ensure that the this context is correctly set to the Router instance when the dashhandler method is invoked.
     this.loginCMT = loginCMT;
     this.registerCMT = registerCMT;
-    this.dashCMT = dashCMT;
     this.failCMT = failCMT;
-    this.dashFormCMT = dashFormCMT;
   }
 
   origin() {

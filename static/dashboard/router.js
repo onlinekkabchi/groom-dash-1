@@ -8,7 +8,7 @@ import { hashWrite } from "./hash.js";
 
 export const router = {
   user: null,
-  app: document.querySelector("#app"),
+  app: null,
   dash: createDashboardElement(),
   board: null,
   list: null,
@@ -17,15 +17,18 @@ export const router = {
   form: null,
   preparedash() {
     this.app.appendChild(this.dash);
-    this.board.getList(this.user);
+    this.board.getList();
   },
   preparewritebtn() {
     this.writeBtb = this.dash.querySelector("#write-btn");
     this.writeBtb.addEventListener("click", () => hashWrite());
   },
-  init() {
+  init(user) {
+    console.log("init");
+    this.user = user;
+    this.app = document.querySelector("#app");
     this.list = this.dash.querySelector("ul");
-    this.board = new Dashboard(this.app, this.dash, this.list);
+    this.board = new Dashboard(this.user, this.app, this.dash, this.list);
     this.preparedash();
     this.preparewritebtn();
   },
@@ -35,18 +38,19 @@ export const router = {
       case "#home":
         this.app.removeChild(this.formElement);
         this.preparedash();
-        console.log(this);
+
         break;
       case "#write":
         this.dash.remove();
         this.app.appendChild(this.formElement);
         this.form = new DashFORM(
+          this.user,
           document.querySelector("#dash-form"),
           document.querySelector("#cancel-btn"),
           document.querySelector("blockquote")
         );
         this.form.addEvent();
-        console.log(this);
+
         break;
       case "#tester":
         break;

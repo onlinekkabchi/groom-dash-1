@@ -3,36 +3,19 @@ import { router } from "./router.js";
 
 const user = new User();
 
-// const observer = new MutationObserver(function (mutationsList) {
-//   console.log(mutationsList);
+window.addEventListener("hashchange", () => router.hashchange());
 
-//   //   for (let mutation of mutationsList) {
-//   //     if (mutation.type === "childList") {
-//   //       console.log("Child nodes have been added or removed.");
-//   //     }
-//   //   }
-// });
-
-// observer.observe(app, { childList: true });
+user.addEventListener("userToken", function () {
+  router.init(user);
+});
 
 window.onload = function () {
   const params = new URLSearchParams(window.location.search);
-  const userInfo = params.get("logged");
-
-  userInfo ? (router.user = userInfo) : alert("유저정보없음");
-
-  // user.setState("true"); // 유저 세팅
-
-  router.init();
-
-  console.log("router");
-  console.log(router);
-  console.log("user");
-  console.log(user);
+  const userLogged = params.get("logged");
+  if (userLogged) {
+    user.setUser(userLogged);
+  } else {
+    const userSession = sessionStorage.getItem("user");
+    userSession ? user.setUser(userSession) : alert("유저정보없음");
+  }
 };
-
-window.addEventListener("hashchange", () => router.hashchange());
-
-user.addEventListener("userin", function () {
-  console.log("User state changed:", user.state);
-});

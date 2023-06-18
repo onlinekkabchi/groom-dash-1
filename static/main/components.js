@@ -36,33 +36,9 @@ const registerCMT = ` <h3>회원가입</h3>
   placeholder="Enter your password"
   required
 /><br /><br />
-<input type="submit" value="가입">
+<input type="submit" value="가입기능 비활성화 상태입니다.">
 </form>`;
-
-const dashCMT = `<div>
-    <h2>게시판</h2>
-    <div id="dashboard">
-    <ul></ul>
-    <input type="button" value="글쓰기"/>
-    <blockquote></blockquote>
-    </div>
-  </div>`;
 
 const failCMT = `<div>로그인실패ㅠ</div>`;
 
-const dashBASE = `
-<ul></ul>
-<input type="button" value="글쓰기"/>
-<blockquote></blockquote>
-`;
-
-const dashFormCMT = `<form id="dash-form">
-  <label for="title">제목: </label>
-  <textarea id="title" name="title" rows="5" cols="20"></textarea>
-  <label for="content">내용: </label>
-  <textarea id="content" name="content" rows="5" cols="20"></textarea>
-  <input type="submit" value="submit"/>
-  <input type="button" value="cancel"/>
-</form>`;
-
-export { loginCMT, registerCMT, dashCMT, failCMT, dashBASE, dashFormCMT };
+export { loginCMT, registerCMT, failCMT };
