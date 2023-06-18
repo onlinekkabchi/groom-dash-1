@@ -25,12 +25,12 @@ export default class Dashboard {
     });
   }
 
-  async getList(info) {
+  async getList(user) {
     if (this.data.length > 0) {
       this.data = [];
     }
     try {
-      await fetch(`/dash/writedash?user=${info}`)
+      await fetch(`/dash/list?logged=${user}`)
         .then((res) => res.json())
         .then((res) => res.result)
         .then((result) =>
@@ -39,9 +39,9 @@ export default class Dashboard {
           })
         );
     } catch (error) {
-      console.log(error);
+      alert("목록 불러올 수 없음");
     } finally {
-      this.render();
+      this.data ? this.render() : "";
     }
   }
 }

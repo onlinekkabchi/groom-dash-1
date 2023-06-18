@@ -35,18 +35,19 @@ export const router = {
       case "#home":
         this.app.removeChild(this.formElement);
         this.preparedash();
-        console.log(this);
+
         break;
       case "#write":
         this.dash.remove();
         this.app.appendChild(this.formElement);
         this.form = new DashFORM(
+          this.user,
           document.querySelector("#dash-form"),
           document.querySelector("#cancel-btn"),
           document.querySelector("blockquote")
         );
         this.form.addEvent();
-        console.log(this);
+
         break;
       case "#tester":
         break;

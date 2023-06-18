@@ -17,18 +17,13 @@ const user = new User();
 
 window.onload = function () {
   const params = new URLSearchParams(window.location.search);
-  const userInfo = params.get("logged");
+  const userLogged = params.get("logged");
 
-  userInfo ? (router.user = userInfo) : alert("유저정보없음");
+  userLogged ? (router.user = userLogged) : alert("유저정보없음");
 
   // user.setState("true"); // 유저 세팅
 
   router.init();
-
-  console.log("router");
-  console.log(router);
-  console.log("user");
-  console.log(user);
 };
 
 window.addEventListener("hashchange", () => router.hashchange());

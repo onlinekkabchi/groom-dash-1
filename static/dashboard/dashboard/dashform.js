@@ -1,8 +1,8 @@
 import { hashHome } from "../hash.js";
-import { formFetch } from "./fetch.js";
 
 export default class DashFORM {
-  constructor(dash, cancel, block) {
+  constructor(user, dash, cancel, block) {
+    this.user = user;
     this.dashForm = dash;
     this.cancelBtn = cancel;
     this.blockquote = block;
@@ -20,9 +20,17 @@ export default class DashFORM {
     e.preventDefault();
     const formDATA = new FormData(e.target);
     const BODY = Object.fromEntries(formDATA);
-    // const capture = (str) => {
-    //   this.blockquote.innerText = str;
-    // };
-    formFetch(BODY);
+
+    try {
+      await fetch(`/dash/writedash?${this.user}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(BODY),
+      }).then((res) => (this.blockquote.innerText = res.message));
+    } catch (err) {
+      alert(err);
+    } finally {
+      window.location.hash = "#home";
+    }
   }
 }
