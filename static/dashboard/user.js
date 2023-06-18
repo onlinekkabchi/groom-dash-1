@@ -7,13 +7,19 @@ export default class User extends EventTarget {
 
   setState(val) {
     this.state = val;
+    this.dispatchEvent(new CustomEvent("userin", { detail: { state: true } }));
+  }
+
+  setToken(token) {
+    this.token = token;
     this.dispatchEvent(
-      new CustomEvent("userin", { detail: { state: "true" } })
+      new CustomEvent("userToken", { detail: { token: !null } })
     );
   }
 
   setUser(token) {
     sessionStorage.setItem("user", token);
+    this.setToken(token);
   }
 
   getUser() {

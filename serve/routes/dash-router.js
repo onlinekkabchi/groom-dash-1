@@ -51,7 +51,7 @@ router.post("/writedash", authMiddleware, async (req, res) => {
 });
 
 router.get("/post", (req, res) => {
-  res.send("post!");
+  res.sendFile(path.resolve("../../static/post/index.html"));
 });
 
 router.post("/post", (req, res) => {

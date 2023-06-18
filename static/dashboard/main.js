@@ -13,13 +13,10 @@ window.onload = function () {
   } else {
     alert("유저정보없음");
   }
-
-  router.user = user;
-  router.init();
 };
 
 window.addEventListener("hashchange", () => router.hashchange());
 
-user.addEventListener("userin", function () {
-  console.log("User state changed:", user.state);
+user.addEventListener("userToken", function () {
+  router.init(user);
 });

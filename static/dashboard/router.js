@@ -23,10 +23,12 @@ export const router = {
     this.writeBtb = this.dash.querySelector("#write-btn");
     this.writeBtb.addEventListener("click", () => hashWrite());
   },
-  init() {
+  init(user) {
+    this.user = user;
     this.app = document.querySelector("#app");
     this.list = this.dash.querySelector("ul");
     this.board = new Dashboard(this.user, this.app, this.dash, this.list);
+    console.log(this.user);
     this.preparedash();
     this.preparewritebtn();
   },
