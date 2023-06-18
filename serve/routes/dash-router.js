@@ -12,6 +12,7 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.get("/list", authMiddleware, async (req, res) => {
+  console.log("리스트 가져오기");
   try {
     await axios
       .get(list)
@@ -29,6 +30,7 @@ router.get("/list", authMiddleware, async (req, res) => {
 
 router.post("/writedash", authMiddleware, async (req, res) => {
   // 인증과정
+  console.log("게시글 쓰기");
   const { title, content } = req.body;
   await axios
     .post(list, null, {
@@ -38,11 +40,13 @@ router.post("/writedash", authMiddleware, async (req, res) => {
       },
     })
     .then((response) => response.data)
-    .then((result) => res.send(JSON.stringify({ result: result })))
+    .then((result) =>
+      res.send(
+        JSON.stringify({ message: "게시글 올리기 성공", result: result })
+      )
+    )
     .catch((err) =>
-      res
-        .status(500)
-        .send(JSON.stringify({ message: "Axios error", error: err }))
+      res.status(500).send(JSON.stringify({ message: "error", error: err }))
     );
 });
 

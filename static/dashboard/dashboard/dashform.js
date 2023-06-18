@@ -5,7 +5,6 @@ export default class DashFORM {
     this.user = user;
     this.dashForm = dash;
     this.cancelBtn = cancel;
-    this.blockquote = block;
   }
 
   addEvent() {
@@ -22,11 +21,13 @@ export default class DashFORM {
     const BODY = Object.fromEntries(formDATA);
 
     try {
-      await fetch(`/dash/writedash?${this.user}`, {
+      await fetch(`/dash/writedash?logged=${this.user.token}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(BODY),
-      }).then((res) => (this.blockquote.innerText = res.message));
+      });
     } catch (err) {
       alert(err);
     } finally {

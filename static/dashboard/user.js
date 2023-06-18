@@ -1,7 +1,7 @@
 export default class User extends EventTarget {
   constructor() {
     super();
-    this.info = null;
+    this.token = null;
     this.state = false;
   }
 
@@ -12,12 +12,11 @@ export default class User extends EventTarget {
     );
   }
 
-  setUser(info) {
-    sessionStorage.setItem("user", info);
-    this.setInfo();
+  setUser(token) {
+    sessionStorage.setItem("user", token);
   }
 
-  setInfo() {
-    this.info = sessionStorage.getItem("user");
+  getUser() {
+    this.token = sessionStorage.getItem("user");
   }
 }

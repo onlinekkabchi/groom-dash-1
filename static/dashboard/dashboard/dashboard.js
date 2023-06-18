@@ -1,7 +1,8 @@
 import { createPostElement } from "./component.js";
 
 export default class Dashboard {
-  constructor(app, dash, list) {
+  constructor(user, app, dash, list) {
+    this.user = user;
     this.app = app;
     this.dash = dash;
     this.list = list;
@@ -25,12 +26,12 @@ export default class Dashboard {
     });
   }
 
-  async getList(user) {
+  async getList() {
     if (this.data.length > 0) {
       this.data = [];
     }
     try {
-      await fetch(`/dash/list?logged=${user}`)
+      await fetch(`/dash/list?logged=${this.user.token}`)
         .then((res) => res.json())
         .then((res) => res.result)
         .then((result) =>
@@ -38,7 +39,7 @@ export default class Dashboard {
             this.data.push(el);
           })
         );
-    } catch (error) {
+    } catch (err) {
       alert("목록 불러올 수 없음");
     } finally {
       this.data ? this.render() : "";

@@ -28,10 +28,8 @@ router.post("/", async (req, res) => {
         secretKey,
         { expiresIn: 3600 } // expires in 1 hour (3600 seconds)
       );
-
-      console.log(result);
+      console.log("로그인성공");
       console.log(token);
-
       res.redirect("/dash" + `?logged=${token}`);
     } else {
       res.redirect("/#fail");

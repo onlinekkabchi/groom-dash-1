@@ -6,7 +6,6 @@ export const authMiddleware = express.Router();
 
 authMiddleware.use((req, res, next) => {
   console.log("Time:", Date.now());
-
   const token = req.query.logged;
   jwt.verify(token, secretKey, (err, decoded) => {
     if (err) {
