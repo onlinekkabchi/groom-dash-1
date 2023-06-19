@@ -2,11 +2,12 @@ import express from "express";
 import path from "node:path";
 const router = express.Router();
 router.use(express.json());
-const addr = "./static/map";
-router.use("/", express.static(path.resolve(addr)));
+
+router.use("/", express.static(path.resolve("./static/map")));
+router.use("/style", express.static(path.resolve("./static/style")));
 
 router.get("/", (req, res) => {
-  res.sendFile(path.resolve(addr + "/index.html"));
+  res.sendFile(path.resolve("./static/map/index.html"));
 });
 
 export default router;

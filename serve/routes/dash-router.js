@@ -5,9 +5,8 @@ import { list } from "../db/mongo-client.js";
 import { authMiddleware } from "../middleware/auth-mid.js";
 
 const router = express.Router();
-const addr = "./static/dashboard";
-
-router.use("/", express.static(path.resolve(addr)));
+router.use("/", express.static(path.resolve("./static/dashboard")));
+router.use("/style", express.static(path.resolve("./static/style")));
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
