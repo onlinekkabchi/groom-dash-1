@@ -20,7 +20,7 @@ app.use("/", express.static(path.resolve("./static/main")));
 app.use("/style", express.static(path.resolve("./static/style")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./static/main/index.html"));
+  res.sendFile(path.resolve("./static/index.html"));
 });
 
 app.listen(PORT, () => {

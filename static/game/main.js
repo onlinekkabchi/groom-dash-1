@@ -3,10 +3,9 @@ import {
   FilesetResolver,
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
 
-window.onload = function () {
-  console.log("game");
-};
+console.log("game");
 
+const imageContainers = document.getElementsByClassName("detectOnClick");
 const demosSection = document.getElementById("demos");
 
 let handLandmarker = undefined;
@@ -15,7 +14,7 @@ let runningMode = "IMAGE";
 let enableWebcamButton;
 let webcamRunning = false;
 
-const createHandLandMarker = async () => {
+async function createHandLandMarker() {
   const vision = await FilesetResolver.forVisionTasks(
     "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
   );
@@ -28,19 +27,36 @@ const createHandLandMarker = async () => {
     numHands: 2,
   });
   demosSection?.classList.remove("invisible");
-};
-
-createHandLandMarker();
+}
 
 // Demo 1: Grab a bunch of images from the page and detection them
-
-const imageContainers = document.getElementsByClassName("detectOnClick");
+createHandLandMarker();
 
 // Now let's go through all of these and add a click event listener.
 for (let i = 0; i < imageContainers.length; i++) {
-  // Add event listener to the child element whichis the img element.
+  // Add event listener to the child element which is the img element.
   imageContainers[i].children[0].addEventListener("click", handleClick);
 }
+
+const video = document.getElementById("webcam");
+const canvasElement = document.getElementById("output_canvas");
+const canvasCtx = canvasElement.getContext("2d");
+
+// Check if webcam access is supported.
+const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
+
+// If webcam supported, add event listener to button for when user
+// wants to activate it.
+if (hasGetUserMedia()) {
+  enableWebcamButton = document.getElementById("webcamButton");
+  enableWebcamButton.addEventListener("click", enableCam);
+} else {
+  console.warn("getUserMedia() is not supported by your browser");
+}
+
+let lastVideoTime = -1;
+let results = undefined;
+console.log(video);
 
 async function handleClick(event) {
   if (!handLandmarker) {
@@ -86,22 +102,6 @@ async function handleClick(event) {
   }
 }
 
-const video = document.getElementById("webcam");
-const canvasElement = document.getElementById("output_canvas");
-const canvasCtx = canvasElement.getContext("2d");
-
-// Check if webcam access is supported.
-const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
-
-// If webcam supported, add event listener to button for when user
-// wants to activate it.
-if (hasGetUserMedia()) {
-  enableWebcamButton = document.getElementById("webcamButton");
-  enableWebcamButton.addEventListener("click", enableCam);
-} else {
-  console.warn("getUserMedia() is not supported by your browser");
-}
-
 // Enable the live webcam view and start detection.
 function enableCam(event) {
   if (!handLandmarker) {
@@ -129,9 +129,6 @@ function enableCam(event) {
   });
 }
 
-let lastVideoTime = -1;
-let results = undefined;
-console.log(video);
 async function predictWebcam() {
   canvasElement.style.width = video.videoWidth;
   canvasElement.style.height = video.videoHeight;

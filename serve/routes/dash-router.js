@@ -10,6 +10,10 @@ router.use("/style", express.static(path.resolve("./static/style")));
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+router.get("/", (req, res) => {
+  res.sendFile(path.resolve("./static/index.html"));
+});
+
 router.get("/list", authMiddleware, async (req, res) => {
   console.log("리스트 가져오기");
   try {
@@ -48,6 +52,8 @@ router.post("/writedash", authMiddleware, async (req, res) => {
       res.status(500).send(JSON.stringify({ message: "error", error: err }))
     );
 });
+
+router.use("/post/style", express.static(path.resolve("./static/style")));
 
 router.get("/post", (req, res) => {
   res.sendFile(path.resolve("./static/post/index.html"));

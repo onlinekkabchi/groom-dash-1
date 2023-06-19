@@ -1,0 +1,21 @@
+#dashboard > ul {
+  margin: 0;
+  padding: 0;
+}
+
+#dashboard > ul > li {
+  background-color: azure;
+  list-style: none;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+#dashboard > ul > li > h5 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+}
+
+#dashboard > ul > li > sub {
+  margin: 0;
+}

@@ -7,7 +7,7 @@ router.use("/", express.static(path.resolve("./static/map")));
 router.use("/style", express.static(path.resolve("./static/style")));
 
 router.get("/", (req, res) => {
-  res.sendFile(path.resolve("./static/map/index.html"));
+  res.sendFile(path.resolve("./static/index.html"));
 });
 
 export default router;
