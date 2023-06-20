@@ -38,7 +38,6 @@ export class Model {
 
   predictWebcam(video) {
     let startTimeMs = performance.now();
-
     this.result = this.handLandmarker.detectForVideo(video, startTimeMs);
     console.log(this.result);
   }
@@ -47,20 +46,24 @@ export class Model {
 export class View {
   constructor() {
     this.app = this.getElement("#app");
-    this.canvas = this.createElement("canvas", "canvas-output");
-    this.canvas.width = 800;
-    this.canvas.height = 380;
-    this.canvas.style.border = "2px solid gray";
-    this.ctx = this.canvas.getContext("2d");
 
     this.video = this.createElement("video", "webcam");
+    this.video.width = 480;
+    // this.video.height = 300;
     this.video.setAttribute("style", "position: absolute");
     this.video.setAttribute("autoplay", "");
     this.video.setAttribute("playsinline", "");
 
     this.webcamButton = this.createElement("button", "mdc-button");
     this.webcamButton.textContent = "Enable Webcam";
-    this.webcamRunning = false;
+
+    this.canvas = this.createElement("canvas", "canvas-output");
+    this.canvas.style.width = this.video.videoWidth;
+    this.canvas.style.height = this.video.videoHeight;
+    this.canvas.width = this.video.videoWidth;
+    this.canvas.height = this.video.videoHeight;
+    this.canvas.style.border = "2px solid gray";
+    this.ctx = this.canvas.getContext("2d");
 
     this.app.append(this.canvas, this.video, this.webcamButton);
   }
@@ -118,6 +121,10 @@ export class Controller {
     }
   }
 
+  predictHandler() {
+    this.model.predictWebcam(this.view.video);
+  }
+
   enabelCam() {
     navigator.mediaDevices
       .getUserMedia({
@@ -126,12 +133,8 @@ export class Controller {
       .then((stream) => {
         this.view.video.srcObject = stream;
         this.view.video.addEventListener("loadeddata", () => {
-          // window.requestAnimationFrame(() => {
-          //   this.model.predictWebcam(this.view.video);
-          // });
-
           const predictFrame = () => {
-            this.model.predictWebcam(this.view.video);
+            this.predictHandler();
             window.requestAnimationFrame(predictFrame);
           };
           window.requestAnimationFrame(predictFrame);
