@@ -8,7 +8,7 @@ router.use("/", express.static(path.resolve("./static/game")));
 router.use("/style", express.static(path.resolve("./static/style")));
 
 router.get("/", (req, res) => {
-  res.sendFile(path.resolve("./static/index.html"));
+  res.sendFile(path.resolve("./static/game/index.html"));
 });
 
 export default router;
