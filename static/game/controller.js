@@ -1,8 +1,3 @@
-// import {
-//   HandLandmarker,
-//   FilesetResolver,
-// } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
-
 // export class Model {
 //   constructor() {
 //     this.vision;
@@ -107,6 +102,7 @@ export class Controller {
     this.webcamRunning = false;
     this.initialize();
     this.checkGetUserMedia();
+    this.lastFrame;
   }
 
   async initialize() {
@@ -123,7 +119,7 @@ export class Controller {
       this.view.webcamButton.addEventListener("click", () => {
         if (this.webcamRunning) {
           this.signal();
-          this.view.video.pause();
+          this.disableCam();
         } else {
           this.signal();
           this.enabelCam();
@@ -132,45 +128,45 @@ export class Controller {
     }
   }
 
+  disableCam() {
+    this.view.video.pause();
+  }
+
   predictHandler() {
     const result = this.model.predictWebcam(this.view.video);
-    // console.log(result);
-    this.view.ctx.save();
-    // this.view.ctx.fillStyle = "#FF0000";
-    this.view.ctx.clearRect(
-      0,
-      0,
-      this.view.canvas.width,
-      this.view.canvas.height
-    );
-    for (const landmarks of result.landmarks) {
-      drawConnectors(this.view.ctx, landmarks, HAND_CONNECTIONS, {
-        color: "#00FF00",
-        lineWidth: 5,
-      });
-      drawLandmarks(this.view.ctx, landmarks, {
-        color: "#FF0000",
-        lineWidth: 2,
-      });
-    }
+    console.log(result);
+    this.view.draw(result);
+  }
 
-    this.view.ctx.restore();
+  requestLoop() {
+    const predictFrame = () => {
+      this.predictHandler();
+      this.webcamRunning
+        ? window.requestAnimationFrame(predictFrame)
+        : () => {
+            return;
+          };
+    };
+    window.requestAnimationFrame(predictFrame);
   }
 
   enabelCam() {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-      })
-      .then((stream) => {
-        this.view.video.srcObject = stream;
-        this.view.video.addEventListener("loadeddata", () => {
-          const predictFrame = () => {
-            this.predictHandler();
-            window.requestAnimationFrame(predictFrame);
-          };
-          window.requestAnimationFrame(predictFrame);
+    this.initialize()
+      .then(() => {
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+          this.view.video.srcObject = stream;
         });
+      })
+      // .then(() => {
+      //   this.view.video.play();
+      // })
+      .then(() => {
+        this.view.video.addEventListener("loadeddata", () => {
+          this.requestLoop();
+        });
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
       });
   }
 }

@@ -24,12 +24,8 @@ export class Model {
       runningMode: "VIDEO",
       numHands: 2,
     });
-    // console.log(
-    //   "model vision and landmarker created",
-    //   this.vision,
-    //   this.handLandmarker
-    // );
-    // console.log(this);
+
+    return this.handLandmarker;
   }
 
   detectLandmarks(image) {

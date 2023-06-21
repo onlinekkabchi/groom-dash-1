@@ -15,13 +15,11 @@ export class View {
 
     this.canvas = this.createElement("canvas", "canvas-output");
 
-    this.canvas.style.border = "3px dashed blue";
-
     this.ctx = this.canvas.getContext("2d");
 
     this.video.addEventListener("loadedmetadata", () => {
-      //   this.canvas.style.width = this.video.videoWidth + "px";
-      //   this.canvas.style.height = this.video.videoHeight + "px";
+      this.canvas.style.width = this.video.videoWidth + "px";
+      this.canvas.style.height = this.video.videoHeight + "px";
       this.canvas.width = this.video.videoWidth;
       this.canvas.height = this.video.videoHeight;
     });
@@ -47,5 +45,25 @@ export class View {
       this.webcamButton.innerText = "DISABLE PREDICTIONS";
       return true;
     }
+  }
+
+  draw(result) {
+    // console.log(result);
+    this.ctx.save();
+    // this.view.ctx.fillStyle = "#FF0000";
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    for (const landmarks of result.landmarks) {
+      drawConnectors(this.ctx, landmarks, HAND_CONNECTIONS, {
+        color: "#00FF00",
+        lineWidth: 5,
+      });
+      drawLandmarks(this.ctx, landmarks, {
+        color: "#FF0000",
+        lineWidth: 2,
+      });
+    }
+
+    this.ctx.restore();
   }
 }
