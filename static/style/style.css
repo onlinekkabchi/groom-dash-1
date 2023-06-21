@@ -35,3 +35,12 @@ video {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
 }
+
+canvas {
+  border: 1px dashed blue;
+  position: absolute;
+  z-index: 1;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
