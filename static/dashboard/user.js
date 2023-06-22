@@ -4,12 +4,6 @@ export default class User extends EventTarget {
     this.token = null;
   }
 
-  // setUserEvent() {
-  //   this.dispatchEvent(
-  //     new CustomEvent("userToken", { detail: { token: !null } })
-  //   );
-  // }
-
   getUser() {
     const userSession = sessionStorage.getItem("user");
     userSession ? this.setToken(userSession) : alert("유저정보없음");
