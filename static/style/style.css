@@ -1,17 +1,17 @@
-@font-face {
+/* @font-face {
   font-family: "Dovemayo_wild";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/Dovemayo_wild.woff2")
     format("woff2");
   font-weight: normal;
   font-style: normal;
-}
+} */
 html {
   padding: 0;
 }
 body {
   width: 100vh;
   height: 100vh;
-  font-family: "Dovemayo_wild";
+  /* font-family: "Dovemayo_wild"; */
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -75,7 +75,21 @@ input[type="password"] {
   border-radius: 5px;
   border: 1px solid black;
 }
-
-button {
-  padding: 1%;
+input[type="submit"] {
+  background-color: transparent;
+  max-width: 200px;
+  padding-block: 1%;
+  padding-inline: 2%;
+  margin-block: 2%;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+input[type="button"] {
+  background-color: transparent;
+  max-width: 200px;
+  padding-block: 1%;
+  padding-inline: 2%;
+  margin-block: 2%;
+  border-radius: 5px;
+  border: 1px solid black;
 }

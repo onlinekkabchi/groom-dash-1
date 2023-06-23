@@ -16,7 +16,7 @@ const loginCMT = ` <h3>로그인하세요</h3>
   placeholder="12345aaabbc"
   required
 />
-<input class="mdc-button" type="submit" value="로그인버튼"/>
+<input type="submit" value="로그인버튼"/>
 </form>`;
 
 const registerCMT = ` <h3>회원가입</h3>

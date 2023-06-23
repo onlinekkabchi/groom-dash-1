@@ -6,5 +6,6 @@ window.onload = function () {
   const model = new Model();
   const view = new View();
 
-  const controller = new Controller(model, view);
+  const user = sessionStorage.getItem("user");
+  user ? new Controller(model, view) : alert("유저정보없음");
 };
