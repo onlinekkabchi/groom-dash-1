@@ -1,22 +1,22 @@
-const loginCMT = ` <h3>로그인</h3>
+const loginCMT = ` <h3>로그인하세요</h3>
 <form id="form-login" method="post" action="/login" attr="login">    
 <label for="username">Username:</label>
 <input
   type="text"
   id="username"
   name="username"
-  placeholder="Enter your username"
+  placeholder="user1234"
   required
-/><br /><br />
+/>
 <label for="password">Password:</label>
 <input
   type="password"
   id="password"
   name="password"
-  placeholder="Enter your password"
+  placeholder="12345aaabbc"
   required
-/><br /><br />
-<input type="submit" value="로그인"/>
+/>
+<input class="mdc-button" type="submit" value="로그인버튼"/>
 </form>`;
 
 const registerCMT = ` <h3>회원가입</h3>

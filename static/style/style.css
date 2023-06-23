@@ -5,31 +5,20 @@
   font-weight: normal;
   font-style: normal;
 }
+html {
+  padding: 0;
+}
 body {
-  max-width: 400px;
+  width: 100vh;
+  height: 100vh;
   font-family: "Dovemayo_wild";
   display: flex;
   flex-direction: column;
-  padding-left: 3%;
-  padding-bottom: 10%;
-}
-
-header {
-  background-color: #faffff;
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  padding-block: 5%;
-}
-header > h1 {
   margin: 0;
-  padding: 0;
 }
-nav {
-  background-color: #e1f5fe;
-  padding-block: 3%;
+#app {
+  padding: 5%;
 }
-
 video {
   position: absolute;
   clear: both;
@@ -38,7 +27,6 @@ video {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
 }
-
 canvas {
   position: absolute;
   z-index: 1;
@@ -46,7 +34,48 @@ canvas {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
 }
+nav {
+  padding-block: 5%;
+}
+nav > a {
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  position: relative;
+}
+nav > a:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 33%;
+  right: 0;
+  width: 1px;
+  height: 33%;
+  background-color: #000; /* Sets the color of the divider */
+}
+nav > a:focus {
+  color: blue;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding-block: 5%;
+}
+input[type="text"] {
+  max-width: 200px;
+  padding-inline: 2%;
+  margin-block: 2%;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+input[type="password"] {
+  max-width: 200px;
+  padding-inline: 2%;
+  margin-block: 2%;
+  border-radius: 5px;
+  border: 1px solid black;
+}
 
 button {
-  z-index: 10;
+  padding: 1%;
 }

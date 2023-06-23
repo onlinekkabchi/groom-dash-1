@@ -68,7 +68,8 @@ export const createDashboardElement = () => {
   const writeBtnElement = document.createElement("input");
   writeBtnElement.id = "write-btn";
   writeBtnElement.type = "button";
-  writeBtnElement.value = "글쓰기";
+  // writeBtnElement.classList = "mdc-button mdc-button--raised";
+  writeBtnElement.value = "조금 특이한 DB에 글쓰기";
 
   const ulElement = document.createElement("ul");
 

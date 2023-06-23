@@ -54,9 +54,6 @@ export class Controller {
           this.view.video.srcObject = stream;
         });
       })
-      // .then(() => {
-      //   this.view.video.play();
-      // })
       .then(() => {
         this.view.video.addEventListener("loadeddata", () => {
           this.requestLoop();

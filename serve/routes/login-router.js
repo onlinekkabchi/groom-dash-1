@@ -23,11 +23,7 @@ router.post("/", async (req, res) => {
       .findOne({ userId: username, userPassword: password });
     if (result) {
       // 유저아이디 암호화
-      const token = jwt.sign(
-        { userId: result.userId },
-        secretKey,
-        { expiresIn: 3600 } // expires in 1 hour (3600 seconds)
-      );
+      const token = jwt.sign({ userId: result.userId }, secretKey);
       console.log("로그인성공");
       console.log(token);
       res.redirect("/dash" + `?logged=${token}`);

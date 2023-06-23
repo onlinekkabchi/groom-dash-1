@@ -1,10 +1,12 @@
 #dashboard > ul {
-  margin: 0;
+  height: 300px;
+  overflow-y: scroll;
   padding: 0;
+  margin-bottom: 20px;
 }
 
 #dashboard > ul > li {
-  background-color: azure;
+  border-bottom: 1px solid black;
   list-style: none;
   cursor: pointer;
   margin-bottom: 5px;
@@ -18,4 +20,13 @@
 
 #dashboard > ul > li > sub {
   margin: 0;
+}
+
+#dashboard > input[type="button"] {
+  background-color: transparent;
+  padding-block: 1%;
+  padding-inline: 3%;
+  margin: 0;
+  border: 1px solid black;
+  cursor: pointer;
 }
